@@ -133,23 +133,33 @@ class Player:
         print("preparation of circuit...")
 
 
-n = 5
-shots = 100
+def run(n, shots):
 
-print("setting up a Game with {} players".format(n))
+    print("setting up a Game with {} players".format(n))
+    out = "setting up a Game with {} players\n".format(n)
 
-gc = GameController(n)
+    gc = GameController(n)
 
-print("\n\nNow executing the circuit! \n({} times)".format(shots))
-job = qiskit.execute(gc.circuit, gc.backend, shots=shots) 
-result=job.result()
-c = result.get_counts(gc.circuit)
-print("\n\nRESULTS:\n")
+    print("\n\nNow executing the circuit! \n({} times)".format(shots))
+    out += "\n\nNow executing the circuit! \n\n({} times)".format(shots)
+    job = qiskit.execute(gc.circuit, gc.backend, shots=shots) 
+    result=job.result()
+    c = result.get_counts(gc.circuit)
+    print("\n\nRESULTS:\n")
+    out += "\n\nRESULTS:\n\n"
 
-if (gc.su % 2 == 0):
-    print("the sum ({}) is EVEN so we expect the result [ '00' : {}]".format(gc.su, shots))
-else:
-    print("the sum ({}) is ODD so we expect the result [ '11' : {}]".format(gc.su, shots))
-    
-print("The Result is:")
-print(c)
+    if (gc.su % 2 == 0):
+        print("the sum ({}) is EVEN so we expect the result [ '00' : {}]".format(gc.su, shots))
+        out += "the sum ({}) is EVEN so we expect the result [ '00' : {}]\n".format(gc.su, shots)
+    else:
+        print("the sum ({}) is ODD so we expect the result [ '11' : {}]".format(gc.su, shots))
+        out += "the sum ({}) is ODD so we expect the result [ '11' : {}]\n".format(gc.su, shots)
+        
+    print("The Result is:")
+    out += "The Result is:\n"
+    print(c)
+    out += str(c)
+    return out
+
+if __name__ == "__main__":
+    run(5,100)
