@@ -71,7 +71,7 @@ class GameController:
         #    print('    - %s' % backend)
 
         # load account
-        IBMQ.enable_account('52e86bacfb9a8485be7c14754131913dd1690a936a9ce11d72e5c92ef98071396b9c0252ad3844016f4fe73ece05cae52e8564b1d849b2707288397b3248f263')
+        IBMQ.enable_account(#PUT YOUR TOCKEN HERE)
         #IBMQ.load_account()
 
         # check providers in account
